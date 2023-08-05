@@ -3,9 +3,14 @@
     <div class="top-section">
       <h1>Welcome to EstimaPro</h1>
       <p>Enter the User Story Number:</p>
-      <input v-model="userStory" type="text" placeholder="User Story Number">
+      <input v-model="userStory" type="text" placeholder="User Story Number" />
       <button @click="startSession">Start Session</button>
-      <user-list v-if="sessionStarted"></user-list>
+      <h1 v-if="sessionStarted" >{{ sessionLink }}</h1>
+      <user-list :users="users" v-if="sessionStarted"></user-list>
+      <button @click="showResults">show results</button>
+      <button @click="restart">restart</button>
+      <button @click="newStory">newStory</button>
+      <button @click="saveInfo">saveInfo</button>
     </div>
     <div class="bottom-section" v-if="sessionStarted">
       <!-- Your results table will go here -->
@@ -15,6 +20,7 @@
 
 <script>
 import UserList from './UserList.vue'
+import axios from 'axios'
 
 export default {
   name: 'App',
@@ -24,17 +30,52 @@ export default {
   data() {
     return {
       userStory: '',
-      sessionStarted: false
+      sessionStarted: false,
+      sessionLink:'',
+      users: [] // Will hold the users
     }
   },
   methods: {
-    startSession() {
+    async startSession() {
       if (this.userStory !== '') {
         console.log(`Starting session for User Story: ${this.userStory}`)
         this.sessionStarted = true
+
+        try {
+        const response = await axios.post('http://localhost:5000/start_session');
+        console.log(response)
+        this.sessionLink = response.data.websocket_url;
+        console.log(this.sessionLink)
+      } catch (error) {
+        console.error('An error occurred while starting the session:', error);
+      }
+
+        // Simulate users joining the session
+        //this.simulateUsersJoining()
       } else {
         console.log('Please enter a User Story Number.')
       }
+    },
+    showResults() {
+      console.log('showing results')
+    },
+    restart() {
+      console.log('restarting')
+    },
+    newStory() {
+      console.log('new story')
+    },
+    saveInfo() {
+      console.log('save info')
+    },
+    simulateUsersJoining() {
+      // Add users at intervals
+      const names = ['John', 'Jane', 'Alice', 'Bob']
+      names.forEach((name, index) => {
+        setTimeout(() => {
+          this.users.push({ id: index, name: name, image: 'https://via.placeholder.com/50' })
+        }, index * 2000) // Add a user every 2 seconds
+      })
     }
   }
 }

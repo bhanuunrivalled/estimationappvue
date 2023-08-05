@@ -10,14 +10,8 @@
   <script>
   export default {
     name: 'UserList',
-    data() {
-      return {
-        users: [
-          { id: 1, name: 'John Doe', image: 'https://via.placeholder.com/50' },
-          { id: 2, name: 'Jane Doe', image: 'https://via.placeholder.com/50' },
-          // Add more users as needed
-        ]
-      }
+    props: {
+      users: Array
     }
   }
   </script>
