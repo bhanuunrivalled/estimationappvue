@@ -5,8 +5,8 @@
       <p>Enter the User Story Number:</p>
       <input v-model="userStory" type="text" placeholder="User Story Number" />
       <button @click="startSession">Start Session</button>
-      <h1 v-if="sessionStarted" >{{ sessionLink }}</h1>
-      <user-list :users="users" v-if="sessionStarted"></user-list>
+      <user-list :session-id="sessionId" v-if="sessionId"></user-list>
+      <!-- end buttons -->
       <button @click="showResults">show results</button>
       <button @click="restart">restart</button>
       <button @click="newStory">newStory</button>
@@ -32,6 +32,7 @@ export default {
       userStory: '',
       sessionStarted: false,
       sessionLink:'',
+      sessionId:null,
       users: [] // Will hold the users
     }
   },
@@ -42,14 +43,14 @@ export default {
         this.sessionStarted = true
 
         try {
+          // TODO move to config later 
         const response = await axios.post('http://localhost:5000/start_session');
         console.log(response)
-        this.sessionLink = response.data.websocket_url;
-        console.log(this.sessionLink)
+        this.sessionId = response.data.session_id;
+        console.log(this.sessionId)
       } catch (error) {
         console.error('An error occurred while starting the session:', error);
       }
-
         // Simulate users joining the session
         //this.simulateUsersJoining()
       } else {
