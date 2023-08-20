@@ -6,7 +6,7 @@ import Player from './components/Player.vue';
 
 const routes = [
     { path: '/', component: Home }, // Add this line
-    { path: '/player', component: Player },
+    { path: '/player/:roomName', component: Player },
     // Add other routes as needed
 ];
 
