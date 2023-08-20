@@ -2,8 +2,9 @@
   <div class="user-list">
     <div v-for="user in users" :key="user.id" class="user">
       <img :src="user.image" :alt="user.name" class="user-image" />
+      <button @click="deleteUser(user.id)" class="delete-btn">X</button>
       <p>{{ user.name }} <span v-if="user.estimation !== -1">Estimated: {{ user.estimation }}</span></p>
-    </div>
+</div>
   </div>
 </template>
 

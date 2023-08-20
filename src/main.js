@@ -1,7 +1,20 @@
+import { createApp } from 'vue';
+import Home from './components/Home.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import App from './App.vue';
+import Player from './components/Player.vue';
 
-import { createApp } from 'vue'
-import App from './App.vue'
+const routes = [
+    { path: '/', component: Home }, // Add this line
+    { path: '/player', component: Player },
+    // Add other routes as needed
+];
 
-createApp(App).mount('#app')
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+});
 
-
+const app = createApp(App);
+app.use(router);
+app.mount('#app');
