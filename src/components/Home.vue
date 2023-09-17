@@ -1,35 +1,28 @@
 <template>
-  <div id="app">
-    <div class="top-section">
-      <h1>Welcome to EstimaPro</h1>
-      <p>Enter the User Story Number:</p>
-      <input v-model="userStory" type="text" placeholder="User Story Number" />
-      <button @click="startSession">Start Session</button>
-      <user-list :session-id="sessionId" v-if="sessionId"></user-list>
-      <!-- end buttons -->
-      <button @click="showingResults">show results</button>
-      <button @click="restart">restart</button>
-      <button @click="newStory">newStory</button>
-      <button @click="saveInfo">saveInfo</button>
-    </div>
-    <div class="bottom-section">
-      <table v-if="showResults">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Estimation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users" :key="user.id">
-            <td>{{ user.name }}</td>
-            <td>{{ user.estimation }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <h1>Welcome to EstimaPro</h1>
+        <v-text-field v-model="userStory" label="User Story Number" placeholder="Enter User Story Number"></v-text-field>
+        <v-btn @click="startSession">Start Session</v-btn>
+
+        <user-list :session-id="sessionId" v-if="sessionId"></user-list>
+
+        <v-btn @click="showingResults">Show Results</v-btn>
+        <v-btn @click="restart">Restart</v-btn>
+        <v-btn @click="newStory">New Story</v-btn>
+        <v-btn @click="saveInfo">Save Info</v-btn>
+      </v-col>
+    </v-row>
+
+    <v-row v-if="showResults">
+      <v-col>
+
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+
   
 <script>
 import UserList from './UserList.vue'
@@ -108,5 +101,6 @@ export default {
   /* 40% of the container's height */
   overflow: auto;
   /* Add a scrollbar if the content is too tall */
-}</style>
+}
+</style>
   

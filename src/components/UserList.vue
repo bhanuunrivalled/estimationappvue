@@ -1,14 +1,10 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col v-for="user in users" :key="user.id" cols="12" sm="4" md="3">
-          <v-avatar image="user.image"></v-avatar>
-      </v-col>
-    </v-row>
-  </v-container>
-</template>
-
-
+  <v-col v-for="user in users" :key="user.id" cols="12" sm="4" md="3" class="text-center">
+    <v-avatar size="120" :image="user.image" :class="['user-avatar', 'estimated', user.estimation !== -1 ? 'estimated' : '']" >
+    </v-avatar>
+    <div>{{ user.name }}</div>
+  </v-col>
+  </template>
 
 
 <script src="./userlist.js"></script>
