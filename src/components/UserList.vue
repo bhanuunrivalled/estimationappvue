@@ -1,46 +1,24 @@
 <template>
-  <div class="user-list">
-    <div v-for="user in users" :key="user.id" class="user-container">
-      <img :src="user.image" :alt="user.name" :class="['user-image', user.estimation !== -1 ? 'estimated' : '']" />
-      <button @click="deleteUser(user.id)" class="delete-btn">X</button>
-      <p class="username">{{ user.name }}</p>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col v-for="user in users" :key="user.id" cols="12" sm="4" md="3">
+          <v-avatar image="user.image"></v-avatar>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+
+
 
 
 <script src="./userlist.js"></script>
 <style>
-.user-list {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-}
-
-.user-container {
-  position: relative;
-  display: flex;
-  align-items: center;
+.estimated {
+  border: 2px solid green;
 }
 
 .user-image {
-  border-radius: 50%;
-  border: 5px solid red;
-  /* Default border color */
-  transition: all 0.3s;
-  /* Optional: for smooth color change */
-}
-
-.user-image.estimated {
-  border-color: green;
-  /* Border color when estimated */
-}
-
-.username {
-  text-align: center;
-  font-size: 1rem;
-  /* Other styles as per your preference */
+  border: 2px solid red;
 }
 
 .delete-btn {
@@ -57,4 +35,5 @@
   /* Font size */
   cursor: pointer;
   /* Mouse pointer */
-}</style>
+}
+</style>
