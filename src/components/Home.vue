@@ -3,18 +3,8 @@
     <v-row>
       <v-col>
         <h1>Welcome to EstimaPro</h1>
-        <v-text-field v-model="userStory" label="User Story Number" placeholder="Enter Session Name"></v-text-field>
+        <v-text-field v-model="teamName" label="Team Name" placeholder="Enter Team Name"></v-text-field>
         <v-btn @click="startSession">Start Session</v-btn>
-
-        <user-list :session-id="sessionId" v-if="sessionId"></user-list>
-
-       
-      </v-col>
-    </v-row>
-
-    <v-row v-if="showResults">
-      <v-col>
-
       </v-col>
     </v-row>
   </v-container>
@@ -22,56 +12,26 @@
 
   
 <script>
-import UserList from './UserList.vue'
 import axios from 'axios'
 
 export default {
   name: 'App',
-  components: {
-    UserList
-  },
   data() {
     return {
-      userStory: '',
-      sessionStarted: false,
-      sessionLink: '',
-      sessionId: null,
-      users: [], // Will hold the users
-      showResults: false,
+      teamName: '',
     }
   },
   methods: {
     async startSession() {
-      if (this.userStory !== '') {
-        console.log(`Starting session for User Story: ${this.userStory}`)
-        this.sessionStarted = true
-
+      if (this.teamName !== '') {
+        console.log(`Starting session  ${this.teamName}`)
         try {
-          // TODO move to config later 
-          const response = await axios.post('http://localhost:5000/start_session');
-          console.log(response)
-          this.sessionId = response.data.session_id;
-          console.log(this.sessionId)
+          this.$router.push({ name: 'Userlist', params: { roomName: this.teamName } });
         } catch (error) {
           console.error('An error occurred while starting the session:', error);
         }
-      } else {
-        console.log('Please enter a User Story Number.')
       }
-    },
-    showingResults() {
-      console.log('showing results')
-      this.showResults = true
-    },
-    restart() {
-      console.log('restarting')
-    },
-    newStory() {
-      console.log('new story')
-    },
-    saveInfo() {
-      console.log('save info')
-    },
+    }
   }
 }
 </script>

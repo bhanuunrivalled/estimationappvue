@@ -3,6 +3,8 @@ import Home from './components/Home.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
 import Player from './components/Player.vue';
+import Userlist from './components/UserList.vue';
+
 
 // Vuetify
 import 'vuetify/styles'
@@ -19,6 +21,7 @@ const vuetify = createVuetify({
 const routes = [
     { path: '/', component: Home }, // Add this line
     { path: '/player/:roomName', component: Player },
+    { path: '/userlist/:roomName', component: Userlist },
     // Add other routes as needed
 ];
 
