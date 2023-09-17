@@ -7,6 +7,49 @@ export default {
       users: [],
       socket: null,
       sessionId: this.$route.params.roomName,
+      userStory:null,
+      desserts: [
+        {
+          name: 'Frozen Yogurt',
+          calories: 159,
+        },
+        {
+          name: 'Ice cream sandwich',
+          calories: 237,
+        },
+        {
+          name: 'Eclair',
+          calories: 262,
+        },
+        {
+          name: 'Cupcake',
+          calories: 305,
+        },
+        {
+          name: 'Gingerbread',
+          calories: 356,
+        },
+        {
+          name: 'Jelly bean',
+          calories: 375,
+        },
+        {
+          name: 'Lollipop',
+          calories: 392,
+        },
+        {
+          name: 'Honeycomb',
+          calories: 408,
+        },
+        {
+          name: 'Donut',
+          calories: 452,
+        },
+        {
+          name: 'KitKat',
+          calories: 518,
+        },
+      ],
     }
   },
   mounted() {
@@ -21,10 +64,24 @@ export default {
       });
       this.socket.on('connect', () => {
         console.log('Connected to the server');
+
       });
       this.socket.emit('subscribe_to_room', {
         room: this.sessionId
       });
+
+      this.socket.emit('get_all_users', { room_id: this.sessionId });
+
+      this.socket.on('all_users_data', (users) => {
+        this.users = users.map(user => ({
+          id: user.sid,  // map 'sid' from backend to 'id' on frontend
+          name: user.username,  // map 'username' from backend to 'name' on frontend
+          image: this.create_image_url(),  // generate a new image URL for each user
+          estimation: user.estimation  // 'estimation' field is the same on both backend and frontend
+        }));
+      });
+      
+
       this.socket.on('user_joined', (data) => {
         console.log('User joined:', data);
         let user_obj = {

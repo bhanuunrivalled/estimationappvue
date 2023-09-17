@@ -1,23 +1,21 @@
 <template>
-  <div>
-    <div v-if="!isJoined">
-      <h1>Enter your name</h1>
-      <input v-model="playerName" type="text" placeholder="Your name" />
-      <button @click="joinGame">Join</button>
-    </div>
-    <div v-if="isJoined">
-      <label for="estimate">Choose an estimate:</label>
-      <select id="estimate" v-model="selectedEstimate">
-        <option disabled value="">Please select an estimate</option>
-        <option>S</option>
-        <option>M</option>
-        <option>L</option>
-        <option>XL</option>
-        <option>?</option>
-      </select>
-      <button @click="submitEstimate" :disabled="!selectedEstimate">Estimate</button>
-    </div>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <div v-if="!isJoined">
+          <h1>Enter your name</h1>
+          <v-text-field v-model="playerName" label="Your name" placeholder="Your name"></v-text-field>
+          <v-btn @click="joinGame">Join</v-btn>
+        </div>
+        <div v-if="isJoined">
+          <v-select :items="['S', 'M', 'L', 'XL', '?']" label="Choose an estimate" v-model="selectedEstimate"
+             :hint="!selectedEstimate ? 'Please select an estimate' : ''"
+            persistent-hint></v-select>
+          <v-btn @click="submitEstimate" :disabled="!selectedEstimate">Estimate</v-btn>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script src="./player.js"></script>
