@@ -35,6 +35,12 @@ export default {
         this.users.push(user_obj);
       });
 
+      this.socket.on('user_left', (data) => {
+        console.log('User left:', data.userid);
+        this.users = this.users.filter(user => user.id !== data.userid);
+        // Update the UI to reflect the user's departure
+      });
+
       this.socket.on('user_estimation_response', (data) => {
         console.log('User estimated:', data);
         let userId = data.userid
@@ -42,9 +48,7 @@ export default {
         console.log(user_obj)
         user_obj.estimation = data.estimation
       });
-
       console.log('users:', this.users);
-
     },
 
     create_image_url() {
@@ -59,6 +63,9 @@ export default {
     },
     deleteUser(id) {
       // call API or update local data
+      console.log('deleting user with id:', id);
+      this.users = this.users.filter(user => user.id !== id);
+      this.socket.emit('delete_user', { userId: id, roomId: this.sessionId });
     }
 
 
