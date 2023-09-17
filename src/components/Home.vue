@@ -3,15 +3,12 @@
     <v-row>
       <v-col>
         <h1>Welcome to EstimaPro</h1>
-        <v-text-field v-model="userStory" label="User Story Number" placeholder="Enter User Story Number"></v-text-field>
+        <v-text-field v-model="userStory" label="User Story Number" placeholder="Enter Session Name"></v-text-field>
         <v-btn @click="startSession">Start Session</v-btn>
 
         <user-list :session-id="sessionId" v-if="sessionId"></user-list>
 
-        <v-btn @click="showingResults">Show Results</v-btn>
-        <v-btn @click="restart">Restart</v-btn>
-        <v-btn @click="newStory">New Story</v-btn>
-        <v-btn @click="saveInfo">Save Info</v-btn>
+       
       </v-col>
     </v-row>
 
@@ -58,8 +55,6 @@ export default {
         } catch (error) {
           console.error('An error occurred while starting the session:', error);
         }
-        // Simulate users joining the session
-        //this.simulateUsersJoining()
       } else {
         console.log('Please enter a User Story Number.')
       }

@@ -6,6 +6,14 @@
       <div>{{ user.name }}</div>
       <v-btn small color="red" @click="deleteUser(user.id)">X</v-btn>
     </v-col>
+    <v-col>
+
+      <v-btn>Show Results</v-btn>
+      <v-btn>Restart</v-btn>
+      <v-btn>New Story</v-btn>
+      <v-btn>Save Info</v-btn>
+
+    </v-col>
   </v-row>
 </template>
 
@@ -37,4 +45,5 @@
   /* Font size */
   cursor: pointer;
   /* Mouse pointer */
-}</style>
+}
+</style>
