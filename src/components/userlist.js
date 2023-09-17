@@ -2,11 +2,11 @@ import io from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
-  props: ['sessionId'],
   data() {
     return {
       users: [],
-      socket: null
+      socket: null,
+      sessionId: this.$route.params.roomName,
     }
   },
   mounted() {
@@ -14,6 +14,8 @@ export default {
   },
   methods: {
     connectToSession() {
+      console.log('Connecting to session:', this.sessionId);
+      
       this.socket = io(`http://localhost:5000`, {
         query: { room_id: this.sessionId },
       });

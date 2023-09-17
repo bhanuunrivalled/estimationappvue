@@ -26,7 +26,7 @@ export default {
       if (this.teamName !== '') {
         console.log(`Starting session  ${this.teamName}`)
         try {
-          this.$router.push({ name: 'Userlist', params: { roomName: this.teamName } });
+          this.$router.push({ name: 'UserList', params: { roomName: this.teamName } });
         } catch (error) {
           console.error('An error occurred while starting the session:', error);
         }
