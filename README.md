@@ -1,6 +1,6 @@
 # pokerjs
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple Estimation app , the goal is to create a way for the developers to vote on a Userstory with a scrum master organizing 
 
 ## Recommended IDE Setup
 
